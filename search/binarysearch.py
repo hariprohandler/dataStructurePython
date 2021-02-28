@@ -23,6 +23,23 @@ def binary_search(number_list, number_to_find):
             right_index = mid_index -1
     return -1;
 
+@time_it
+def binary_search_recursive(number_list, number_to_find, left_indx, right_index):
+    if right_index < left_indx:
+        return -1
+    mid_index = (left_indx +right_index) // 2  #return integer
+
+    if mid_index >= len(number_list) or mid_index < 0:
+        return -1
+    mid_number = number_list[mid_index]
+    if(mid_number == number_to_find):
+        return mid_index;
+    
+    if mid_number < number_to_find:
+        left_indx = mid_index + 1
+    else:
+        right_index = mid_index -1
+    return binary_search_recursive(number_list, number_to_find, left_indx, right_index)
 
 if __name__ == '__main__':
     number_list = [12,15,17,19,21,24,45,67]
@@ -31,4 +48,6 @@ if __name__ == '__main__':
     index = linear_search(number_list, number_to_find);
     print(f"Number found at index {index} using linear search")
     index = binary_search(number_list, number_to_find);
+    print(f"Number found at index {index} using binary search")
+    index = binary_search_recursive(number_list, number_to_find, 0, len(number_list));
     print(f"Number found at index {index} using binary search")
